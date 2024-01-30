@@ -1,11 +1,11 @@
 import { FC } from 'react'
-import { CMSBlogDetails } from './types'
+import { CMSPages } from './types'
 
-const BlockDetails = async ({params}: {params: {slug: string}}) => {
+const Page = async ({params}: {params: {slug: string}}) => {
 
-  const reqUrl = `${process.env.BASE_URL}/posts?_fields=id,slug,title,content&slug=${params.slug}`
+  const reqUrl = `${process.env.BASE_URL}/pages?_fields=id,slug,title,content&slug=${params.slug}`
   const request = await fetch(reqUrl)
-  const pages = await request.json() as CMSBlogDetails
+  const pages = await request.json() as CMSPages
   const page = pages[0]
 
   if(!page) return null
@@ -21,4 +21,4 @@ const BlockDetails = async ({params}: {params: {slug: string}}) => {
   )
 }
 
-export default BlockDetails
+export default Page

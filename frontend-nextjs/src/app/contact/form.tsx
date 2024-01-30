@@ -69,7 +69,6 @@ const Form = () => {
       body: data,
     })
     const response = await req.json()
-    console.log(response); 
 
     if (!response) return console.log('error submitting form')
 

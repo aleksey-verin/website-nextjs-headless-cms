@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import Navigation from './Navigation'
+import Navigation from './navigation'
 
 interface HeaderProps {}
 

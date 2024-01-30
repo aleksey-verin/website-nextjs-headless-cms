@@ -35,4 +35,14 @@ const Products = async ({params}: {params: {slug: string}}) => {
   )
 }
 
+export async function generateStaticParams() {
+  const reqUrl = `${process.env.BASE_URL}/products?_fields=slug`
+  const request = await fetch(reqUrl)
+  const products = await request.json() as CMSProducts
+ 
+  return products.map((product) => ({
+    slug: product.slug,
+  }))
+}
+
 export default Products
