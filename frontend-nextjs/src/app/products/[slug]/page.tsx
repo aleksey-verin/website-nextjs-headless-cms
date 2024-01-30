@@ -1,17 +1,21 @@
 import Image from 'next/image'
-import { FC } from 'react'
+import { CMSProducts } from '../types'
 
-interface ProductsProps {}
+const Products = async ({params}: {params: {slug: string}}) => {
 
-const Products: FC<ProductsProps> = ({}) => {
+  const reqUrl = `${process.env.BASE_URL}/products?acf_format=standard&_fields=id,slug,title,acf&slug=${params.slug}`
+  const request = await fetch(reqUrl)
+  const products = await request.json() as CMSProducts
+  const product = products[0]
+
   return (
     <div className='container mx-auto p-8 pb-16'>
       <section>
-        <h1 className='text-4xl bold text-center font-bold mb-8'>Individual product</h1>
+        <h1 className='text-4xl bold text-center font-bold mb-8'>{product.title.rendered}</h1>
         <div className='grid md:grid-cols-2 gap-8'>
           <div>
             <Image
-              src='https://source.unsplash.com/random'
+              src={product.acf.large_image}
               width='960'
               height='540'
               alt='product'
@@ -19,15 +23,10 @@ const Products: FC<ProductsProps> = ({}) => {
           </div>
           <div>
             <div className='text-md font-semibold mb-1'>Category</div>
-            <div className='text-lg mb-8'>Electronics</div>
+            <div className='text-lg mb-8'>{product.acf.category.name}</div>
             <div className='text-md font-semibold mb-1'>Summary</div>
             <div className='text-lg mb-8'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum minima quia, numquam
-              corrupti, unde sed dignissimos ipsam reprehenderit voluptates aperiam, placeat odio.
-              Ipsam esse fugit et facere sequi eius accusantium. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Vel facilis possimus sequi, quam, tenetur molestiae
-              voluptas facere, aspernatur odit temporibus fugit. Doloremque blanditiis, minus vero
-              vitae in, dignissimos mollitia cupiditate maxime dolorum repellat reprehenderit, ipsam.
+            {product.acf.summary}
             </div>
           </div>
         </div>

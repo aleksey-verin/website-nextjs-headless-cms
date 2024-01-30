@@ -7,7 +7,7 @@ const Button = ({
   children,
 }: {
   href?: string
-  type: 'button' | 'submit' | 'reset' | undefined
+  type?: 'button' | 'submit' | 'reset' | undefined
   className?: string
   children?: React.ReactNode
 }) => {

@@ -8,9 +8,10 @@ interface CardProps {
   subtitle: string
   btnLabel: string
   href: string
+  thumbnail: string
 }
 
-const Card: FC<CardProps> = ({ title, subtitle, btnLabel, href }) => {
+const Card: FC<CardProps> = ({ title, subtitle, btnLabel, href, thumbnail  }) => {
   return (
     <div className='text-center'>
       <Link href={href}>
@@ -18,7 +19,8 @@ const Card: FC<CardProps> = ({ title, subtitle, btnLabel, href }) => {
           className='block mx-auto mb-q'
           width='600'
           height='400'
-          src='https://source.unsplash.com/random'
+          src={thumbnail}
+          // src={'https://source.unsplash.com/random'}
           alt='card thumbnail image'
         />
       </Link>
